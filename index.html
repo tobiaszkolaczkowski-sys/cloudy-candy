@@ -1,0 +1,1347 @@
+```html
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cloudy Candy 🍭</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #fff7fc;
+    color: #333;
+    overflow-x: hidden;
+}
+
+/* ===== NAVBAR ===== */
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 3px 20px rgba(0,0,0,0.08);
+    padding: 15px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 800;
+    color: #ff5fa2;
+}
+
+.nav-links {
+    display: flex;
+    gap: 25px;
+    list-style: none;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #ff5fa2;
+}
+
+.cart-button {
+    border: none;
+    background: #ff5fa2;
+    color: white;
+    padding: 11px 17px;
+    border-radius: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.cart-button:hover {
+    transform: scale(1.05);
+}
+
+/* ===== MOBILE MENU ===== */
+
+.menu-button {
+    display: none;
+    border: none;
+    background: none;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+/* ===== HERO ===== */
+
+.hero {
+    min-height: 620px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 20px;
+    background: linear-gradient(135deg, #ffd8ec, #e8dcff, #d9f6ff);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before,
+.hero::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.45);
+    animation: floating 6s infinite ease-in-out;
+}
+
+.hero::before {
+    width: 180px;
+    height: 180px;
+    top: 80px;
+    left: 5%;
+}
+
+.hero::after {
+    width: 250px;
+    height: 250px;
+    bottom: -80px;
+    right: 3%;
+    animation-delay: 1s;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    animation: fadeUp 1s ease;
+}
+
+.hero h1 {
+    font-size: clamp(45px, 8vw, 80px);
+    color: #ff4f9a;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 20px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.hero-button {
+    display: inline-block;
+    text-decoration: none;
+    background: #ff5fa2;
+    color: white;
+    padding: 16px 30px;
+    border-radius: 40px;
+    font-size: 18px;
+    font-weight: bold;
+    box-shadow: 0 10px 30px rgba(255,95,162,0.3);
+    transition: 0.3s;
+}
+
+.hero-button:hover {
+    transform: translateY(-5px) scale(1.03);
+}
+
+/* ===== SECTIONS ===== */
+
+section {
+    padding: 80px 5%;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.section-title h2 {
+    font-size: 40px;
+    color: #ff5fa2;
+    margin-bottom: 10px;
+}
+
+/* ===== PRODUCTS ===== */
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.product {
+    background: white;
+    border-radius: 25px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 10px 35px rgba(0,0,0,0.08);
+    transition: 0.35s;
+    display: flex;
+    flex-direction: column;
+    animation: fadeUp 0.8s ease;
+}
+
+.product:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 45px rgba(0,0,0,0.13);
+}
+
+.product-image {
+    height: 180px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 85px;
+    margin-bottom: 20px;
+}
+
+.strawberry {
+    background: #ffe0eb;
+}
+
+.blueberry {
+    background: #e4dcff;
+}
+
+.apple {
+    background: #ddf8df;
+}
+
+.watermelon {
+    background: #ffe0d5;
+}
+
+.product h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.product p {
+    color: #777;
+    line-height: 1.5;
+    min-height: 50px;
+}
+
+.price {
+    font-size: 24px;
+    color: #ff4f9a;
+    font-weight: bold;
+    margin: 18px 0;
+}
+
+.add-button {
+    margin-top: auto;
+    border: none;
+    background: #ff5fa2;
+    color: white;
+    padding: 14px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: 0.25s;
+}
+
+.add-button:hover {
+    transform: scale(1.04);
+    background: #ff438f;
+}
+
+/* ===== FEATURES ===== */
+
+.features {
+    background: #fff;
+}
+
+.feature-grid {
+    max-width: 1100px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.feature {
+    background: #fff7fc;
+    border-radius: 20px;
+    padding: 30px 20px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.feature:hover {
+    transform: translateY(-6px);
+}
+
+.feature-icon {
+    font-size: 45px;
+    margin-bottom: 15px;
+}
+
+/* ===== ABOUT ===== */
+
+.about {
+    max-width: 900px;
+    margin: auto;
+    text-align: center;
+}
+
+.about p {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #666;
+}
+
+/* ===== ORDER STEPS ===== */
+
+.steps {
+    max-width: 900px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.step {
+    background: white;
+    padding: 30px;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.07);
+}
+
+.step-number {
+    width: 55px;
+    height: 55px;
+    margin: 0 auto 15px;
+    border-radius: 50%;
+    background: #ff5fa2;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* ===== CONTACT ===== */
+
+.contact {
+    max-width: 650px;
+    margin: auto;
+}
+
+.contact form {
+    background: white;
+    padding: 30px;
+    border-radius: 25px;
+    box-shadow: 0 10px 35px rgba(0,0,0,0.08);
+}
+
+.contact input,
+.contact textarea {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 2px solid #eee;
+    border-radius: 12px;
+    font-size: 16px;
+    outline: none;
+}
+
+.contact input:focus,
+.contact textarea:focus {
+    border-color: #ff8cbb;
+}
+
+.contact textarea {
+    min-height: 130px;
+    resize: vertical;
+}
+
+.contact button {
+    width: 100%;
+    border: none;
+    background: #ff5fa2;
+    color: white;
+    padding: 15px;
+    border-radius: 14px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* ===== CART ===== */
+
+.cart-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 1999;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+}
+
+.cart-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.cart-panel {
+    position: fixed;
+    top: 0;
+    right: -430px;
+    width: min(430px, 100%);
+    height: 100vh;
+    background: white;
+    z-index: 2000;
+    box-shadow: -10px 0 40px rgba(0,0,0,0.15);
+    transition: 0.4s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-panel.active {
+    right: 0;
+}
+
+.cart-header {
+    padding: 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+}
+
+.cart-header h2 {
+    color: #ff5fa2;
+}
+
+.close-cart {
+    border: none;
+    background: #ffe5f0;
+    color: #ff4f9a;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.cart-items {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.empty-cart {
+    text-align: center;
+    color: #888;
+    margin-top: 50px;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.cart-item-icon {
+    font-size: 35px;
+}
+
+.cart-item-info {
+    flex: 1;
+}
+
+.cart-item-info h4 {
+    margin-bottom: 5px;
+}
+
+.quantity {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.quantity button {
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    background: #ffe5f0;
+    color: #ff4f9a;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.cart-footer {
+    padding: 20px;
+    border-top: 1px solid #eee;
+}
+
+.cart-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.order-button {
+    width: 100%;
+    border: none;
+    background: #ff5fa2;
+    color: white;
+    padding: 16px;
+    border-radius: 15px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* ===== TOAST ===== */
+
+.toast {
+    position: fixed;
+    bottom: 25px;
+    left: 50%;
+    transform: translate(-50%, 100px);
+    background: #333;
+    color: white;
+    padding: 15px 22px;
+    border-radius: 30px;
+    z-index: 3000;
+    opacity: 0;
+    transition: 0.35s;
+}
+
+.toast.show {
+    transform: translate(-50%, 0);
+    opacity: 1;
+}
+
+/* ===== FOOTER ===== */
+
+footer {
+    background: #222;
+    color: white;
+    text-align: center;
+    padding: 35px 20px;
+}
+
+footer p {
+    margin: 7px;
+}
+
+/* ===== ANIMATIONS ===== */
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes floating {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-25px);
+    }
+}
+
+/* ===== TABLET ===== */
+
+@media (max-width: 900px) {
+
+    .products {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .steps {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== PHONE ===== */
+
+@media (max-width: 650px) {
+
+    .navbar {
+        padding: 12px 18px;
+    }
+
+    .logo {
+        font-size: 21px;
+    }
+
+    .menu-button {
+        display: block;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 65px;
+        left: 0;
+        width: 100%;
+        background: white;
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+        gap: 18px;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-10px);
+        transition: 0.3s;
+    }
+
+    .nav-links.active {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+    }
+
+    .cart-button {
+        padding: 9px 13px;
+        font-size: 13px;
+    }
+
+    .hero {
+        min-height: 560px;
+        padding: 60px 20px;
+    }
+
+    .hero h1 {
+        font-size: 48px;
+    }
+
+    .hero p {
+        font-size: 17px;
+    }
+
+    section {
+        padding: 60px 18px;
+    }
+
+    .section-title h2 {
+        font-size: 32px;
+    }
+
+    .products {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .product {
+        padding: 20px;
+    }
+
+    .product-image {
+        height: 160px;
+    }
+
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .feature {
+        padding: 25px;
+    }
+
+    .contact form {
+        padding: 20px;
+    }
+
+    .cart-panel {
+        width: 100%;
+    }
+}
+
+/* ===== SMALL PHONES ===== */
+
+@media (max-width: 380px) {
+
+    .hero h1 {
+        font-size: 40px;
+    }
+
+    .logo {
+        font-size: 18px;
+    }
+
+    .cart-button {
+        font-size: 12px;
+        padding: 8px 10px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<header class="navbar">
+
+    <div class="logo">
+        Cloudy Candy
+    </div>
+
+    <button class="menu-button" onclick="toggleMenu()">
+        ☰
+    </button>
+
+    <ul class="nav-links" id="navLinks">
+        <li><a href="#produkty" onclick="closeMenu()">Produkty</a></li>
+        <li><a href="#onas" onclick="closeMenu()">O nas</a></li>
+        <li><a href="#jak-zamawiac" onclick="closeMenu()">Jak zamawiać</a></li>
+        <li><a href="#kontakt" onclick="closeMenu()">Kontakt</a></li>
+    </ul>
+
+    <button class="cart-button" onclick="openCart()">
+        🛒 Koszyk <span id="cartCount">0</span>
+    </button>
+
+</header>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <h1>Cloudy Candy</h1>
+
+        <p>
+            Puchata, kolorowa i świeżo przygotowana wata cukrowa.
+            Wybierz swój ulubiony smak i zamów swoją porcję słodkiej chmurki! 🍭
+        </p>
+
+        <a href="#produkty" class="hero-button">
+            Zobacz produkty
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- PRODUCTS -->
+
+<section id="produkty">
+
+    <div class="section-title">
+        <h2>Nasze smaki 🍭</h2>
+        <p>Wybierz swoją ulubioną chmurkę</p>
+    </div>
+
+    <div class="products">
+
+        <div class="product">
+
+            <div class="product-image strawberry">
+                🍓
+            </div>
+
+            <h3>Truskawkowa</h3>
+
+            <p>
+                Słodka i owocowa wata o truskawkowym smaku.
+            </p>
+
+            <div class="price">
+                10 zł
+            </div>
+
+            <button class="add-button"
+                onclick="addToCart('Truskawkowa', 10, '🍓')">
+                🛒 Dodaj do koszyka
+            </button>
+
+        </div>
+
+
+        <div class="product">
+
+            <div class="product-image blueberry">
+                🫐
+            </div>
+
+            <h3>Jagodowa</h3>
+
+            <p>
+                Delikatna wata z jagodowym aromatem.
+            </p>
+
+            <div class="price">
+                10 zł
+            </div>
+
+            <button class="add-button"
+                onclick="addToCart('Jagodowa', 10, '🫐')">
+                🛒 Dodaj do koszyka
+            </button>
+
+        </div>
+
+
+        <div class="product">
+
+            <div class="product-image apple">
+                🍏
+            </div>
+
+            <h3>Jabłkowa</h3>
+
+            <p>
+                Lekko kwaśny, świeży smak zielonego jabłka.
+            </p>
+
+            <div class="price">
+                10 zł
+            </div>
+
+            <button class="add-button"
+                onclick="addToCart('Jabłkowa', 10, '🍏')">
+                🛒 Dodaj do koszyka
+            </button>
+
+        </div>
+
+
+        <div class="product">
+
+            <div class="product-image watermelon">
+                🍉
+            </div>
+
+            <h3>Arbuzowa</h3>
+
+            <p>
+                Letni, owocowy smak idealny na ciepłe dni.
+            </p>
+
+            <div class="price">
+                10 zł
+            </div>
+
+            <button class="add-button"
+                onclick="addToCart('Arbuzowa', 10, '🍉')">
+                🛒 Dodaj do koszyka
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FEATURES -->
+
+<section class="features">
+
+    <div class="section-title">
+        <h2>Dlaczego Cloudy Candy?</h2>
+    </div>
+
+    <div class="feature-grid">
+
+        <div class="feature">
+            <div class="feature-icon">☁️</div>
+            <h3>Puszysta</h3>
+            <p>Delikatna i lekka jak chmurka.</p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">✨</div>
+            <h3>Świeża</h3>
+            <p>Przygotowywana na świeżo.</p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">❤️</div>
+            <h3>Z pasją</h3>
+            <p>Robiona z dużą ilością dobrej energii.</p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">📦</div>
+            <h3>Gotowa do odbioru</h3>
+            <p>Starannie zapakowana.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ABOUT -->
+
+<section id="onas">
+
+    <div class="about">
+
+        <div class="section-title">
+            <h2>O Cloudy Candy ☁️</h2>
+        </div>
+
+        <p>
+            Cloudy Candy to mały projekt stworzony z miłości do słodkości.
+            Chcemy tworzyć kolorową i pyszną watę cukrową,
+            którą można zamówić w prosty sposób.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- HOW TO ORDER -->
+
+<section id="jak-zamawiac">
+
+    <div class="section-title">
+        <h2>Jak zamawiać?</h2>
+    </div>
+
+    <div class="steps">
+
+        <div class="step">
+            <div class="step-number">1</div>
+            <h3>Wybierz smak</h3>
+            <p>Dodaj wybraną watę do koszyka.</p>
+        </div>
+
+        <div class="step">
+            <div class="step-number">2</div>
+            <h3>Sprawdź koszyk</h3>
+            <p>Zobacz swoje produkty i ilość.</p>
+        </div>
+
+        <div class="step">
+            <div class="step-number">3</div>
+            <h3>Złóż zamówienie</h3>
+            <p>Przejdź dalej i ustal szczegóły odbioru.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CONTACT -->
+
+<section id="kontakt">
+
+    <div class="contact">
+
+        <div class="section-title">
+            <h2>Kontakt 💌</h2>
+            <p>Napisz do nas</p>
+        </div>
+
+        <form onsubmit="sendMessage(event)">
+
+            <input
+                type="text"
+                placeholder="Twoje imię"
+                required
+            >
+
+            <input
+                type="email"
+                placeholder="Twój e-mail"
+                required
+            >
+
+            <textarea
+                placeholder="Twoja wiadomość..."
+                required
+            ></textarea>
+
+            <button type="submit">
+                Wyślij wiadomość
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+<!-- CART OVERLAY -->
+
+<div
+    class="cart-overlay"
+    id="cartOverlay"
+    onclick="closeCart()">
+</div>
+
+
+<!-- CART -->
+
+<div class="cart-panel" id="cartPanel">
+
+    <div class="cart-header">
+
+        <h2>Twój koszyk 🛒</h2>
+
+        <button
+            class="close-cart"
+            onclick="closeCart()">
+            ×
+        </button>
+
+    </div>
+
+
+    <div class="cart-items" id="cartItems">
+
+        <div class="empty-cart">
+            Koszyk jest pusty 🍭
+        </div>
+
+    </div>
+
+
+    <div class="cart-footer">
+
+        <div class="cart-total">
+
+            <span>Razem:</span>
+
+            <span>
+                <span id="cartTotal">0</span> zł
+            </span>
+
+        </div>
+
+        <button
+            class="order-button"
+            onclick="placeOrder()">
+
+            Zamawiam 🛍️
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div class="toast" id="toast">
+    Dodano do koszyka! 🍭
+</div>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <p><strong>Cloudy Candy 🍭</strong></p>
+
+    <p>Wata cukrowa pełna słodkości ☁️</p>
+
+    <p>© 2026 Cloudy Candy</p>
+
+</footer>
+
+
+<script>
+
+let cart = [];
+
+
+/* ===== MOBILE MENU ===== */
+
+function toggleMenu() {
+
+    const menu = document.getElementById("navLinks");
+
+    menu.classList.toggle("active");
+
+}
+
+
+function closeMenu() {
+
+    document
+        .getElementById("navLinks")
+        .classList.remove("active");
+
+}
+
+
+/* ===== ADD TO CART ===== */
+
+function addToCart(name, price, icon) {
+
+    const existing = cart.find(item => item.name === name);
+
+    if (existing) {
+
+        existing.quantity++;
+
+    } else {
+
+        cart.push({
+            name: name,
+            price: price,
+            icon: icon,
+            quantity: 1
+        });
+
+    }
+
+    updateCart();
+
+    showToast("Dodano do koszyka! 🍭");
+
+}
+
+
+/* ===== UPDATE CART ===== */
+
+function updateCart() {
+
+    const container =
+        document.getElementById("cartItems");
+
+    const count =
+        document.getElementById("cartCount");
+
+    const total =
+        document.getElementById("cartTotal");
+
+
+    if (cart.length === 0) {
+
+        container.innerHTML = `
+            <div class="empty-cart">
+                Koszyk jest pusty 🍭
+            </div>
+        `;
+
+        count.textContent = "0";
+        total.textContent = "0";
+
+        return;
+
+    }
+
+
+    let totalPrice = 0;
+    let totalItems = 0;
+
+
+    container.innerHTML = "";
+
+
+    cart.forEach((item, index) => {
+
+        totalPrice += item.price * item.quantity;
+        totalItems += item.quantity;
+
+
+        container.innerHTML += `
+
+            <div class="cart-item">
+
+                <div class="cart-item-icon">
+                    ${item.icon}
+                </div>
+
+                <div class="cart-item-info">
+
+                    <h4>
+                        ${item.name}
+                    </h4>
+
+                    <p>
+                        ${item.price} zł
+                    </p>
+
+                </div>
+
+
+                <div class="quantity">
+
+                    <button onclick="changeQuantity(${index}, -1)">
+                        −
+                    </button>
+
+                    <strong>
+                        ${item.quantity}
+                    </strong>
+
+                    <button onclick="changeQuantity(${index}, 1)">
+                        +
+                    </button>
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+
+    count.textContent = totalItems;
+    total.textContent = totalPrice;
+
+}
+
+
+/* ===== QUANTITY ===== */
+
+function changeQuantity(index, amount) {
+
+    cart[index].quantity += amount;
+
+
+    if (cart[index].quantity <= 0) {
+
+        cart.splice(index, 1);
+
+    }
+
+
+    updateCart();
+
+}
+
+
+/* ===== OPEN CART ===== */
+
+function openCart() {
+
+    document
+        .getElementById("cartPanel")
+        .classList.add("active");
+
+    document
+        .getElementById("cartOverlay")
+        .classList.add("active");
+
+}
+
+
+/* ===== CLOSE CART ===== */
+
+function closeCart() {
+
+    document
+        .getElementById("cartPanel")
+        .classList.remove("active");
+
+    document
+        .getElementById("cartOverlay")
+        .classList.remove("active");
+
+}
+
+
+/* ===== TOAST ===== */
+
+function showToast(message) {
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent = message;
+
+    toast.classList.add("show");
+
+
+    setTimeout(() => {
+
+        toast.classList.remove("show");
+
+    }, 1800);
+
+}
+
+
+/* ===== ORDER ===== */
+
+function placeOrder() {
+
+    if (cart.length === 0) {
+
+        showToast("Najpierw dodaj coś do koszyka 🍭");
+
+        return;
+
+    }
+
+
+    alert(
+        "Dziękujemy! 🥳\n\n" +
+        "To jest na razie wersja demonstracyjna strony.\n" +
+        "Prawdziwe zamówienia i płatności dodamy później."
+    );
+
+}
+
+
+/* ===== CONTACT ===== */
+
+function sendMessage(event) {
+
+    event.preventDefault();
+
+    alert(
+        "Dziękujemy za wiadomość! 💌\n\n" +
+        "Formularz jest na razie demonstracyjny."
+    );
+
+}
+
+</script>
+
+</body>
+</html>
+```
